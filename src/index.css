@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-verse-purple: #8b5cf6;
+  --color-verse-blue: #3b82f6;
+  --color-verse-glow: rgba(139, 92, 246, 0.3);
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white font-sans antialiased selection:bg-verse-purple/30;
+    background-image: 
+      radial-gradient(circle at 50% -20%, rgba(139, 92, 246, 0.15), transparent 70%),
+      radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05), transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05), transparent 40%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glow-card {
+    @apply bg-zinc-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 transition-all duration-300;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .glow-card-purple {
+    @apply border-verse-purple/30 hover:border-verse-purple/60 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)];
+  }
+
+  .glow-card-blue {
+    @apply border-verse-blue/30 hover:border-verse-blue/60 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)];
+  }
+
+  .neon-text-purple {
+    @apply text-verse-purple drop-shadow-[0_0_8px_rgba(139,92,246,0.8)];
+  }
+
+  .neon-text-blue {
+    @apply text-verse-blue drop-shadow-[0_0_8px_rgba(59,130,246,0.8)];
+  }
+
+  .verse-gradient-text {
+    @apply bg-gradient-to-r from-verse-purple to-verse-blue bg-clip-text text-transparent italic;
+  }
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  .animate-marquee-fast {
+    animation: marquee 15s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-800 rounded-full hover:bg-zinc-700 transition-colors;
+}
